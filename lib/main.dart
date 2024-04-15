@@ -4,11 +4,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note/home_screen.dart';
 
 import 'package:note/task.dart';
-import 'package:note/test.dart';
 
 void main() async {
   await Hive.initFlutter();
-  var box = await Hive.openBox('names');
   Hive.registerAdapter(TaskAdapter());
   await Hive.openBox<Task>('taskBox');
 

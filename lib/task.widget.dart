@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:note/edit_task_screen.dart';
 import 'package:note/task.dart';
 
+// ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
   TaskWidget({super.key, required this.task});
   Task task;

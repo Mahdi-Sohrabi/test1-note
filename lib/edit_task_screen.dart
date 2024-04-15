@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:note/task.dart';
 
+// ignore: must_be_immutable
 class EditTaskScreen extends StatefulWidget {
   EditTaskScreen({super.key, required this.task});
   Task task;
