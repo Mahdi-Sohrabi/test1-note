@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note/edit_task_screen.dart';
 import 'package:note/task.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -75,7 +76,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ],
               ),
-              Text(widget.task.SubTitle),
+              Text(widget.task.SubTitle, overflow: TextOverflow.ellipsis),
               Spacer(),
               getTimeAndEditBadges(),
             ],
@@ -125,24 +126,35 @@ class _TaskWidgetState extends State<TaskWidget> {
           ),
         ),
         SizedBox(width: 15),
-        Container(
-          width: 90,
-          height: 28,
-          decoration: BoxDecoration(
-            color: Color(0xffE2F6F1),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            child: Row(
-              children: [
-                Text(
-                  'ویرایش',
-                  style: TextStyle(color: Color(0xff18DAA3)),
-                ),
-                SizedBox(width: 10),
-                Image.asset('images/icon_edit.png'),
-              ],
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return EditTaskScreen(task: widget.task);
+                },
+              ),
+            );
+          },
+          child: Container(
+            width: 90,
+            height: 28,
+            decoration: BoxDecoration(
+              color: Color(0xffE2F6F1),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              child: Row(
+                children: [
+                  Text(
+                    'ویرایش',
+                    style: TextStyle(color: Color(0xff18DAA3)),
+                  ),
+                  SizedBox(width: 10),
+                  Image.asset('images/icon_edit.png'),
+                ],
+              ),
             ),
           ),
         ),

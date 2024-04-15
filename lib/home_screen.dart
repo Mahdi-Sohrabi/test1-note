@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   var task = taskBox.values.toList()[index];
 
-                  return grtTask(task);
+                  return getTask(task);
                 },
               ),
             );
@@ -68,5 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  TaskWidget grtTask(Task task) => TaskWidget(task: task);
+  Widget getTask(Task task) {
+    return Dismissible(
+        key: UniqueKey(),
+        onDismissed: (direction) {
+          task.delete();
+        },
+        child: TaskWidget(task: task));
+  }
 }
