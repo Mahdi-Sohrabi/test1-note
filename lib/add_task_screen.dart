@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:note/home_screen.dart';
 import 'package:note/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
