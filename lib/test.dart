@@ -8,32 +8,17 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  ValueNotifier mobser = ValueNotifier(0);
-  var Value = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              ValueListenableBuilder(
-                valueListenable: mobser,
-                builder: (context, Value, child) {
-                  return Text(
-                    '$Value',
-                    style: TextStyle(fontSize: 40),
-                  );
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  mobser.value = mobser.value + 1;
-                },
-                child: Text('Add'),
-              )
-            ],
+      body: Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+          child: Text(
+            'cascascsacsacsacsacsacscasacscsacsacsacsacsacsacascascascasc',
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),

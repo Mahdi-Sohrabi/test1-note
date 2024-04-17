@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:note/task.dart';
+import 'package:note/data/task.dart';
+import 'package:time_pickerr/time_pickerr.dart';
 
 // ignore: must_be_immutable
 class EditTaskScreen extends StatefulWidget {
@@ -18,6 +19,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   TextEditingController? ControllerTaskTitle;
   TextEditingController? ControllerTaskSubTitle;
   final box = Hive.box<Task>('taskBox');
+
+  DateTime? _time;
 
   @override
   void initState() {
@@ -110,6 +113,34 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               ),
             ),
           ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: CustomHourPicker(
+              title: 'زمان تسک را انتخاب کنید',
+              negativeButtonText: 'حذف کن',
+              positiveButtonText: 'انتخاب زمان',
+              elevation: 2,
+              titleStyle: TextStyle(
+                color: Color(0xff18DAA3),
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+              negativeButtonStyle: TextStyle(
+                color: Color.fromARGB(255, 218, 60, 24),
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+              positiveButtonStyle: TextStyle(
+                color: Color(0xff18DAA3),
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+              onPositivePressed: (context, time) {
+                _time = time;
+              },
+              onNegativePressed: (context) {},
+            ),
+          ),
           Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -137,6 +168,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   editTask(String taskTitle, String taskSubTitle) {
     widget.task.Title = taskTitle;
     widget.task.SubTitle = taskSubTitle;
+    widget.task.time = _time!;
     widget.task.save();
   }
 }

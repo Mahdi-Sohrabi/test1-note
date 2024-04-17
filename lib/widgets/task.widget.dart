@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note/edit_task_screen.dart';
-import 'package:note/task.dart';
+import 'package:note/screens/edit_task_screen.dart';
+import 'package:note/data/task.dart';
 
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
@@ -62,14 +62,11 @@ class _TaskWidgetState extends State<TaskWidget> {
                 children: [
                   Checkbox(
                     value: isBoxChecked,
-                    onChanged: (isChecked) {
-                      setState(() {
-                        isBoxChecked = isChecked!;
-                      });
-                    },
+                    onChanged: (isChecked) {},
                   ),
                   Text(
                     widget.task.Title,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -88,23 +85,6 @@ class _TaskWidgetState extends State<TaskWidget> {
     );
   }
 
-  Column getTitle() {
-    return Column(
-      children: [
-        Text(
-          'تمرین زبان انگلیسی',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text('تمرین زبان انگلیسی کتاب آموزشگاه'),
-        SizedBox(height: 15),
-        getTimeAndEditBadges(),
-      ],
-    );
-  }
-
   Row getTimeAndEditBadges() {
     return Row(
       children: [
@@ -119,7 +99,14 @@ class _TaskWidgetState extends State<TaskWidget> {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Row(
               children: [
-                Text('10:30'),
+                Text(
+                  '${widget.task.time.hour}:${getMinUndterTen(widget.task.time)}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
                 SizedBox(width: 10),
                 Image.asset('images/icon_time.png'),
               ],
@@ -161,5 +148,13 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
       ],
     );
+  }
+
+  String getMinUndterTen(DateTime time) {
+    if (time.minute < 10) {
+      return '0${time.minute}';
+    } else {
+      return time.minute.toString();
+    }
   }
 }

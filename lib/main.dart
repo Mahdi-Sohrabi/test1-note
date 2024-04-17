@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:note/home_screen.dart';
+import 'package:note/screens/home_screen.dart';
 
-import 'package:note/task.dart';
+import 'package:note/data/task.dart';
 
 void main() async {
   await Hive.initFlutter();
