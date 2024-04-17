@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note/screens/add_task_screen.dart';
 import 'package:note/data/task.dart';
-import 'package:note/widgets/task.widget.dart';
+import 'package:note/widgets/task_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
