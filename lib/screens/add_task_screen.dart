@@ -23,6 +23,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   DateTime? _time;
 
+  int _selectedTaskTypeItem = 0;
+
   @override
   void initState() {
     super.initState();
@@ -147,8 +149,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: getTaskTypeList().length,
                   itemBuilder: (context, index) {
-                    return TaskTypeItemList(
-                      taskType: getTaskTypeList()[index],
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          _selectedTaskTypeItem = index;
+                        });
+                      },
+                      child: TaskTypeItemList(
+                        index: index,
+                        selectedItemlist: _selectedTaskTypeItem,
+                        taskType: getTaskTypeList()[index],
+                      ),
                     );
                   },
                 ),
@@ -181,17 +192,38 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   addTask(String taskTitle, String taskSubTitle) {
-    var task = Task(SubTitle: taskSubTitle, Title: taskTitle, time: _time!);
+    var task = Task(
+        SubTitle: taskSubTitle,
+        Title: taskTitle,
+        time: _time!,
+        taskType: getTaskTypeList()[0]);
     box.add(task);
   }
 }
 
+// ignore: must_be_immutable
 class TaskTypeItemList extends StatelessWidget {
-  TaskTypeItemList({super.key, required this.taskType});
+  TaskTypeItemList({
+    super.key,
+    required this.taskType,
+    required this.index,
+    required this.selectedItemlist,
+  });
   TaskType taskType;
+  int index;
+  int selectedItemlist;
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: (selectedItemlist == index) ? Colors.green : Colors.grey,
+          width: (selectedItemlist == index) ? 3 : 0,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       width: 140,
       margin: EdgeInsets.all(8),
       child: Column(
