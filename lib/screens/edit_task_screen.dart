@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:note/data/task.dart';
+import 'package:note/data/task_type.dart';
+import 'package:note/utility/utility.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
 // ignore: must_be_immutable
@@ -21,6 +23,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   final box = Hive.box<Task>('taskBox');
 
   DateTime? _time;
+  int _selectedTaskTypeItem = 0;
 
   @override
   void initState() {
@@ -141,6 +144,27 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               onNegativePressed: (context) {},
             ),
           ),
+          Container(
+            height: 200,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: getTaskTypeList().length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedTaskTypeItem = index;
+                    });
+                  },
+                  child: TaskTypeItemList(
+                    index: index,
+                    selectedItemlist: _selectedTaskTypeItem,
+                    taskType: getTaskTypeList()[index],
+                  ),
+                );
+              },
+            ),
+          ),
           Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -169,6 +193,42 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     widget.task.Title = taskTitle;
     widget.task.SubTitle = taskSubTitle;
     widget.task.time = _time!;
+    widget.task.taskType = getTaskTypeList()[_selectedTaskTypeItem];
     widget.task.save();
+  }
+}
+
+// ignore: must_be_immutable
+class TaskTypeItemList extends StatelessWidget {
+  TaskTypeItemList({
+    super.key,
+    required this.taskType,
+    required this.index,
+    required this.selectedItemlist,
+  });
+  TaskType taskType;
+  int index;
+  int selectedItemlist;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: (selectedItemlist == index) ? Colors.green : Colors.grey,
+          width: (selectedItemlist == index) ? 3 : 0,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      width: 140,
+      margin: EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Image.asset(taskType.image),
+          Text(taskType.title),
+        ],
+      ),
+    );
   }
 }
