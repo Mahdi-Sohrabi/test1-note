@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:note/data/task.dart';
 import 'package:note/utility/utility.dart';
+import 'package:note/utils/snakcbar_utils.dart';
 import 'package:note/widgets/task_type_item.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
@@ -171,10 +172,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     backgroundColor: Color(0xff18DAA3),
                     minimumSize: Size(100, 40)),
                 onPressed: () {
-                  String taskTitle = ControllerTaskTitle.text;
-                  String taskSubTitle = ControllerTaskSubTitle.text;
-                  addTask(taskTitle, taskSubTitle);
-                  Navigator.pop(context);
+                  try {
+                    String taskTitle = ControllerTaskTitle.text;
+                    String taskSubTitle = ControllerTaskSubTitle.text;
+                    addTask(taskTitle, taskSubTitle);
+                    Navigator.pop(context);
+                    SnackbarUtils.showSnackbar(
+                        context, Icons.check_circle, 'فایل اضافه شد');
+                  } catch (e) {
+                    SnackbarUtils.showSnackbar(
+                        context, Icons.error, 'زمان رو انتخاب نکردی');
+                  }
                 },
                 child: Text(
                   'اضافه کردن',
