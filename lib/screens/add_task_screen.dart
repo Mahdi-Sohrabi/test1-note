@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:note/data/task.dart';
-import 'package:note/data/task_type.dart';
 import 'package:note/utility/utility.dart';
+import 'package:note/widgets/task_type_item.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -198,40 +198,5 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         time: _time!,
         taskType: getTaskTypeList()[_selectedTaskTypeItem]);
     box.add(task);
-  }
-}
-
-// ignore: must_be_immutable
-class TaskTypeItemList extends StatelessWidget {
-  TaskTypeItemList({
-    super.key,
-    required this.taskType,
-    required this.index,
-    required this.selectedItemlist,
-  });
-  TaskType taskType;
-  int index;
-  int selectedItemlist;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: (selectedItemlist == index) ? Colors.green : Colors.grey,
-          width: (selectedItemlist == index) ? 3 : 0,
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-      width: 140,
-      margin: EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Image.asset(taskType.image),
-          Text(taskType.title),
-        ],
-      ),
-    );
   }
 }
