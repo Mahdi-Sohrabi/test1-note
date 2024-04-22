@@ -8,6 +8,7 @@ class TaskTypeItemList extends StatelessWidget {
     required this.taskType,
     required this.index,
     required this.selectedItemlist,
+    required int selectedItemList,
   });
   TaskType taskType;
   int index;

@@ -159,6 +159,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         index: index,
                         selectedItemlist: _selectedTaskTypeItem,
                         taskType: getTaskTypeList()[index],
+                        selectedItemList: _selectedTaskTypeItem,
                       ),
                     );
                   },
