@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:note/screens/edit_task_screen.dart';
-import 'package:note/data/task.dart';
+
+import '../data/task.dart';
 
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
-  TaskWidget({super.key, required this.task});
+  TaskWidget({Key? key, required this.task}) : super(key: key);
   Task task;
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -35,7 +36,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        height: 135,
+        height: 132,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(0xffffffff),
@@ -60,86 +61,98 @@ class _TaskWidgetState extends State<TaskWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Checkbox(
-                    value: isBoxChecked,
-                    onChanged: (isChecked) {},
-                  ),
-                  Text(
-                    widget.task.Title,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                  Transform.scale(
+                    scale: 1.4,
+                    child: Checkbox(
+                      value: isBoxChecked,
+                      checkColor: Colors.white,
+                      activeColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(3),
+                        ),
+                      ),
+                      onChanged: (isChecked) {},
                     ),
                   ),
+                  Text(widget.task.Title)
                 ],
               ),
-              Text(widget.task.SubTitle, overflow: TextOverflow.ellipsis),
+              Text(
+                widget.task.SubTitle,
+                overflow: TextOverflow.ellipsis,
+              ),
               Spacer(),
-              getTimeAndEditBadges(),
+              getTimeAndEditBadgs()
             ],
           ),
         ),
-        Image.asset('images/workout.png'),
+        SizedBox(
+          width: 20,
+        ),
+        Image.asset(widget.task.taskType.image),
       ],
     );
   }
 
-  Row getTimeAndEditBadges() {
+  Row getTimeAndEditBadgs() {
     return Row(
       children: [
         Container(
-          width: 95,
+          width: 90,
           height: 28,
           decoration: BoxDecoration(
             color: Color(0xff18DAA3),
             borderRadius: BorderRadius.circular(18),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
             child: Row(
               children: [
                 Text(
                   '${widget.task.time.hour}:${getMinUndterTen(widget.task.time)}',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
                 ),
-                SizedBox(width: 10),
+                SizedBox(
+                  width: 10,
+                ),
                 Image.asset('images/icon_time.png'),
               ],
             ),
           ),
         ),
-        SizedBox(width: 15),
+        SizedBox(
+          width: 15,
+        ),
         InkWell(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return EditTaskScreen(task: widget.task);
-                },
-              ),
-            );
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => EditTaskScreen(
+                      task: widget.task,
+                    )));
           },
           child: Container(
-            width: 90,
+            width: 95,
             height: 28,
             decoration: BoxDecoration(
               color: Color(0xffE2F6F1),
               borderRadius: BorderRadius.circular(18),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'ویرایش',
                     style: TextStyle(color: Color(0xff18DAA3)),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Image.asset('images/icon_edit.png'),
                 ],
               ),
@@ -152,7 +165,8 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   String getMinUndterTen(DateTime time) {
     if (time.minute < 10) {
-      return '0${time.minute}';
+      //9-1
+      return '0${time.minute}'; //9 09 8 08 0 00
     } else {
       return time.minute.toString();
     }
