@@ -16,4 +16,6 @@ class TaskType {
   String title;
   @HiveField(2)
   TaskTypeEnum taskTypeEnum;
+
+  getTaskTypeList() {}
 }
