@@ -78,12 +78,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                   Text(
                     widget.task.Title,
                     overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   )
                 ],
               ),
               Text(
                 widget.task.SubTitle,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
               Spacer(),
               getTimeAndEditBadgs()
