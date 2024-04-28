@@ -75,7 +75,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                       onChanged: (isChecked) {},
                     ),
                   ),
-                  Text(widget.task.Title)
+                  Text(
+                    widget.task.Title,
+                    overflow: TextOverflow.ellipsis,
+                  )
                 ],
               ),
               Text(
@@ -129,10 +132,13 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
         InkWell(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).push(
+              MaterialPageRoute(
                 builder: (context) => EditTaskScreen(
-                      task: widget.task,
-                    )));
+                  task: widget.task,
+                ),
+              ),
+            );
           },
           child: Container(
             width: 95,
