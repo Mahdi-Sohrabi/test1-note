@@ -6,27 +6,27 @@ List<TaskType> getTaskTypeList() {
     TaskType(
         image: 'images/meditate.png',
         title: 'تمرکز',
-        taskTypeEnum: TaskTypeEnum.foucs),
+        taskTypeEnum: TaskTypeEnum.working),
     TaskType(
         image: 'images/work_meeting.png',
         title: 'میتینگ',
-        taskTypeEnum: TaskTypeEnum.date),
+        taskTypeEnum: TaskTypeEnum.working),
     TaskType(
         image: 'images/hard_working.png',
         title: 'کار زیاد',
-        taskTypeEnum: TaskTypeEnum.foucs),
+        taskTypeEnum: TaskTypeEnum.working),
     TaskType(
         image: 'images/banking.png',
         title: 'کار بانکی',
-        taskTypeEnum: TaskTypeEnum.foucs),
+        taskTypeEnum: TaskTypeEnum.working),
     TaskType(
         image: 'images/social_frends.png',
         title: 'قرار دوستانه',
-        taskTypeEnum: TaskTypeEnum.foucs),
+        taskTypeEnum: TaskTypeEnum.working),
     TaskType(
         image: 'images/workout.png',
         title: 'ورزش',
-        taskTypeEnum: TaskTypeEnum.foucs),
+        taskTypeEnum: TaskTypeEnum.working),
   ];
 
   return list;

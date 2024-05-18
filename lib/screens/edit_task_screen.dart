@@ -173,7 +173,6 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                         index: index,
                         selectedItemlist: _selectedTaskTypeItem,
                         taskType: getTaskTypeList()[index],
-                        selectedItemList: _selectedTaskTypeItem,
                       ),
                     );
                   },

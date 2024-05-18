@@ -8,7 +8,6 @@ class TaskTypeItemList extends StatelessWidget {
     required this.taskType,
     required this.index,
     required this.selectedItemlist,
-    required int selectedItemList,
   });
   TaskType taskType;
   int index;
@@ -16,6 +15,8 @@ class TaskTypeItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 140,
+      margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: (selectedItemlist == index) ? Color(0xff18DAA3) : Colors.white,
         border: Border.all(
@@ -25,8 +26,6 @@ class TaskTypeItemList extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      width: 140,
-      margin: EdgeInsets.all(8),
       child: Column(
         children: [
           Image.asset(taskType.image),

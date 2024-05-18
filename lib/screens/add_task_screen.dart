@@ -160,7 +160,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         index: index,
                         selectedItemlist: _selectedTaskTypeItem,
                         taskType: getTaskTypeList()[index],
-                        selectedItemList: _selectedTaskTypeItem,
                       ),
                     );
                   },
@@ -177,8 +176,35 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     String taskSubTitle = ControllerTaskSubTitle.text;
                     addTask(taskTitle, taskSubTitle);
                     Navigator.pop(context);
-                    SnackbarUtils.showSnackbar(
-                        context, Icons.check_circle, 'فایل اضافه شد');
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('data'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('data'),
+                              Text('data'),
+                              Text('data'),
+                              Text('data'),
+                              Text('data'),
+                              Text('data'),
+                            ],
+                          ),
+                          actions: [
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(Icons.abc),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                    // SnackbarUtils.showSnackbar(
+                    //     context, Icons.check_circle, 'فایل اضافه شد');
                   } catch (e) {
                     SnackbarUtils.showSnackbar(
                         context, Icons.error, 'زمان رو انتخاب نکردی');
